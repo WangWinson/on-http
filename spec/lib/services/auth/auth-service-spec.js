@@ -42,6 +42,13 @@ describe('Auth.Service', function () {
 
     };
 
+    function setConfig(){
+        helper.injector.get('Services.Configuration')
+            .set('authPasswordHash', 'KcBN9YobNV0wdux8h0fKNqi4uoKCgGl/j8c6YGlG7iA0PB3P9ojbmANGhDlcSBE0iOTIsYsGbtSsbqP4wvsVcw==')
+            .set('authPasswordSalt', 'zlxkgxjvcFwm0M8sWaGojh25qNYO8tuNWUMN4xKPH93PidwkCAvaX2JItLA3p7BSCWIzkw4GwWuezoMvKf3UXg==')
+            .set('authTokenExpireIn', 86400)
+    }
+
     function restoreConfig(){
         helper.injector.get('Services.Configuration')
             .set('authPasswordHash', 'KcBN9YobNV0wdux8h0fKNqi4uoKCgGl/j8c6YGlG7iA0PB3P9ojbmANGhDlcSBE0iOTIsYsGbtSsbqP4wvsVcw==')
@@ -51,13 +58,14 @@ describe('Auth.Service', function () {
 
     helper.before(function () {
         return [
-            dihelper.simpleWrapper(require('express')(), 'express-app'),
             dihelper.simpleWrapper(require('swagger-express-mw'), 'swagger'),
             dihelper.simpleWrapper(ws.Server, 'WebSocketServer'),
             dihelper.simpleWrapper({}, 'Task.Services.OBM'),
             dihelper.simpleWrapper({}, 'ipmi-obm-service'),
+            dihelper.requireWrapper('rimraf', 'rimraf'),
+            dihelper.requireWrapper('os-tmpdir', 'osTmpdir'),
             helper.require('/lib/services/http-service'),
-            helper.requireGlob('/lib/api/1.1/*.js'),
+            helper.requireGlob('/lib/api/1.1/**/*.js'),
             helper.requireGlob('/lib/services/**/*.js'),
             helper.requireGlob('/lib/serializables/**/*.js')
         ];
@@ -75,6 +83,7 @@ describe('Auth.Service', function () {
 
     describe('Auth.Service', function () {
         before('start http and https server with auth enabled', function () {
+            setConfig();
             startServer(endpoint);
         });
 
@@ -255,6 +264,7 @@ describe('Auth.Service', function () {
             sandbox.stub(jwtStrategy.prototype, 'authenticate', function(req, options) {
                 return this.error('something');
             });
+            setConfig();
             startServer(endpoint);
         });
 
@@ -338,6 +348,7 @@ describe('Auth.Service', function () {
         before('start http and https server with auth enabled', function () {
             this.timeout(10000);
 
+            setConfig();
             helper.injector.get('Services.Configuration')
                 .set('authTokenExpireIn', 1);
             startServer(endpoint);
@@ -352,17 +363,6 @@ describe('Auth.Service', function () {
                     expect(res.body.token).to.be.a('string');
                     token = res.body.token;
                     console.log(SUCCESS_STATUS, res.body)
-                });
-        });
-
-        it('should able to access with correct token in query string', function () {
-            return helper.request('https://localhost:8443')
-                .get('/api/1.1/config?auth_token=' + token)
-                .expect(SUCCESS_STATUS)
-                .expect(function(res) {
-                    expect(res.body).to.be.a('object');
-                    expect(res.body.apiServerPort).to.equal(8080);
-                    console.log(SUCCESS_STATUS);
                 });
         });
 
@@ -391,6 +391,7 @@ describe('Auth.Service', function () {
     describe('Token should not expire as expected', function () {
         before('start https server expiration set to 1 second', function () {
             return Promise.resolve().then(function(){
+                setConfig();
                 helper.injector.get('Services.Configuration')
                     .set('authTokenExpireIn', 1);
                 startServer(endpoint);
@@ -455,6 +456,7 @@ describe('Auth.Service', function () {
                 function(password, salt, interation, bytes, callback) {
                 return callback('something');
             });
+            setConfig();
             startServer(endpoint);
         });
 
@@ -489,6 +491,7 @@ describe('Auth.Service', function () {
                         self.jwtSignOptions
                     );
                 });
+            setConfig();
             startServer(endpoint);
         });
 
