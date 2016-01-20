@@ -95,7 +95,6 @@ describe('Auth.Service', function () {
                 .expect(function (res) {
                     expect(res.body.token).to.be.a('string');
                     token = res.body.token;
-                    console.log(SUCCESS_STATUS, res.body)
                 });
         });
 
@@ -103,11 +102,6 @@ describe('Auth.Service', function () {
             return helper.request('https://localhost:8443')
                 .get('/api/1.1/config?auth_token=' + token)
                 .expect(SUCCESS_STATUS)
-                .expect(function (res) {
-                    expect(res.body).to.be.a('object');
-                    expect(res.body.apiServerPort).to.equal(8080);
-                    console.log(SUCCESS_STATUS);
-                });
         });
 
         it('should fail with wrong token in query string', function () {
@@ -117,7 +111,6 @@ describe('Auth.Service', function () {
                 .expect(function (res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('invalid signature');
-                    console.log(UNAUTHORIZED_STATUS, res.body)
                 });
         });
 
@@ -128,7 +121,6 @@ describe('Auth.Service', function () {
                 .expect(function (res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('No auth token');
-                    console.log(UNAUTHORIZED_STATUS, res.body)
                 });
         });
 
@@ -139,7 +131,6 @@ describe('Auth.Service', function () {
                 .expect(function (res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('No auth token');
-                    console.log(UNAUTHORIZED_STATUS, res.body)
                 });
         });
 
@@ -149,11 +140,6 @@ describe('Auth.Service', function () {
                 .set("authorization", 'JWT ' + token)
                 .send()
                 .expect(SUCCESS_STATUS)
-                .expect(function (res) {
-                    expect(res.body).to.be.a('object');
-                    expect(res.body.apiServerPort).to.equal(8080);
-                    console.log(SUCCESS_STATUS);
-                });
         });
 
         it('should fail with wrong token in query header', function () {
@@ -165,7 +151,6 @@ describe('Auth.Service', function () {
                 .expect(function (res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('invalid signature');
-                    console.log(UNAUTHORIZED_STATUS, res.body)
                 });
         });
 
@@ -178,7 +163,6 @@ describe('Auth.Service', function () {
                 .expect(function (res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('No auth token');
-                    console.log(UNAUTHORIZED_STATUS, res.body)
                 });
         });
 
@@ -191,7 +175,6 @@ describe('Auth.Service', function () {
                 .expect(function (res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('No auth token');
-                    console.log(UNAUTHORIZED_STATUS, res.body)
                 });
         });
 
@@ -200,11 +183,6 @@ describe('Auth.Service', function () {
                 .get('/api/1.1/config')
                 .send({auth_token: token})
                 .expect(SUCCESS_STATUS)
-                .expect(function (res) {
-                    expect(res.body).to.be.a('object');
-                    expect(res.body.apiServerPort).to.equal(8080);
-                    console.log(SUCCESS_STATUS);
-                });
         });
 
         it('should fail with wrong token in query body', function () {
@@ -215,7 +193,6 @@ describe('Auth.Service', function () {
                 .expect(function (res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('invalid signature');
-                    console.log(UNAUTHORIZED_STATUS, res.body)
                 });
         });
 
@@ -227,7 +204,6 @@ describe('Auth.Service', function () {
                 .expect(function (res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('No auth token');
-                    console.log(UNAUTHORIZED_STATUS, res.body)
                 });
         });
 
@@ -239,7 +215,6 @@ describe('Auth.Service', function () {
                 .expect(function (res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('No auth token');
-                    console.log(UNAUTHORIZED_STATUS, res.body)
                 });
         });
 
@@ -250,7 +225,6 @@ describe('Auth.Service', function () {
                 .expect(function (res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('No auth token');
-                    console.log(UNAUTHORIZED_STATUS, res.body)
                 });
         });
 
@@ -275,7 +249,6 @@ describe('Auth.Service', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Internal server error');
-                    console.log(ERROR_STATUS, res.body);
                 })
         });
 
@@ -362,7 +335,6 @@ describe('Auth.Service', function () {
                 .expect(function(res) {
                     expect(res.body.token).to.be.a('string');
                     token = res.body.token;
-                    console.log(SUCCESS_STATUS, res.body)
                 });
         });
 
@@ -378,7 +350,6 @@ describe('Auth.Service', function () {
                         .expect(function (res) {
                             expect(res.body.message).to.be.a('string');
                             expect(res.body.message).to.equal('jwt expired');
-                            console.log(UNAUTHORIZED_STATUS, res.body);
                         });
                 });
         });
@@ -412,7 +383,6 @@ describe('Auth.Service', function () {
                 .expect(function(res) {
                     expect(res.body.token).to.be.a('string');
                     token = res.body.token;
-                    console.log(SUCCESS_STATUS, res.body)
                 });
         });
 
@@ -420,11 +390,6 @@ describe('Auth.Service', function () {
             return helper.request('https://localhost:8443')
                 .get('/api/1.1/config?auth_token=' + token)
                 .expect(SUCCESS_STATUS)
-                .expect(function(res) {
-                    expect(res.body).to.be.a('object');
-                    expect(res.body.apiServerPort).to.equal(8080);
-                    console.log(SUCCESS_STATUS);
-                });
         });
 
         it('Should still able to access after certain time', function() {
@@ -435,11 +400,6 @@ describe('Auth.Service', function () {
                     return helper.request('https://localhost:8443')
                         .get('/api/1.1/config?auth_token=' + token)
                         .expect(SUCCESS_STATUS)
-                        .expect(function(res) {
-                            expect(res.body).to.be.a('object');
-                            expect(res.body.apiServerPort).to.equal(8080);
-                            console.log(SUCCESS_STATUS);
-                        });
                 });
         });
 
@@ -468,7 +428,6 @@ describe('Auth.Service', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Internal server error');
-                    console.log(ERROR_STATUS, res.body);
                 });
         });
 
@@ -503,7 +462,6 @@ describe('Auth.Service', function () {
                 .expect(function(res) {
                     expect(res.body.token).to.be.a('string');
                     token = res.body.token;
-                    console.log(SUCCESS_STATUS, res.body)
                 });
         });
 
@@ -516,7 +474,6 @@ describe('Auth.Service', function () {
                 .expect(function (res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Internal server error');
-                    console.log(ERROR_STATUS, res.body);
                 });
         });
 

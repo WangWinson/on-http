@@ -88,7 +88,6 @@ describe('Http.Api.Login', function () {
                 .expect(SUCCESS_STATUS)
                 .expect(function(res) {
                     expect(res.body.token).to.be.a('string');
-                    console.log(SUCCESS_STATUS, res.body);
                 });
         });
 
@@ -100,7 +99,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Invalid username or password');
-                    console.log(UNAUTHORIZED_STATUS, res.body);
                 });
         });
 
@@ -112,7 +110,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Invalid username or password');
-                    console.log(UNAUTHORIZED_STATUS, res.body);
                 });
         });
 
@@ -124,7 +121,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Missing credentials');
-                    console.log(BAD_REQUEST_STATUS, res.body);
                 });
         });
 
@@ -136,7 +132,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Missing credentials');
-                    console.log(BAD_REQUEST_STATUS, res.body);
                 });
         });
 
@@ -148,7 +143,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Missing credentials');
-                    console.log(BAD_REQUEST_STATUS, res.body);
                 });
         });
 
@@ -160,7 +154,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Missing credentials');
-                    console.log(BAD_REQUEST_STATUS, res.body);
                 });
         });
 
@@ -171,7 +164,6 @@ describe('Http.Api.Login', function () {
                 .expect(SUCCESS_STATUS)
                 .expect(function(res) {
                     expect(res.body.token).to.be.a('string');
-                    console.log(SUCCESS_STATUS, res.body);
                 });
         });
 
@@ -183,7 +175,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Invalid username or password');
-                    console.log(UNAUTHORIZED_STATUS, res.body);
                 });
         });
 
@@ -195,7 +186,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Invalid username or password');
-                    console.log(UNAUTHORIZED_STATUS, res.body);
                 });
         });
 
@@ -207,7 +197,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Missing credentials');
-                    console.log(BAD_REQUEST_STATUS, res.body);
                 });
         });
 
@@ -219,7 +208,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Missing credentials');
-                    console.log(BAD_REQUEST_STATUS, res.body);
                 });
         });
 
@@ -231,7 +219,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Missing credentials');
-                    console.log(BAD_REQUEST_STATUS, res.body);
                 });
         });
 
@@ -243,7 +230,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Missing credentials');
-                    console.log(BAD_REQUEST_STATUS, res.body);
                 });
         });
 
@@ -259,7 +245,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Missing credentials');
-                    console.log(BAD_REQUEST_STATUS, res.body);
                 });
         });
 
@@ -270,7 +255,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Missing credentials');
-                    console.log(BAD_REQUEST_STATUS, res.body);
                 });
         });
 
@@ -300,7 +284,6 @@ describe('Http.Api.Login', function () {
                 .expect(SUCCESS_STATUS)
                 .expect(function(res) {
                     expect(res.body.token).to.be.a('string');
-                    console.log(SUCCESS_STATUS, res.body);
                 });
         });
 
@@ -311,7 +294,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Missing credentials');
-                    console.log(BAD_REQUEST_STATUS, res.body);
                 });
         });
 
@@ -334,9 +316,6 @@ describe('Http.Api.Login', function () {
                 .post('/api/1.1/login')
                 .send({username: "admin", password: "admin123"})
                 .expect(NOT_FOUND_STATUS)
-                .expect(function(res) {
-                    console.log(NOT_FOUND_STATUS, res.body);
-                });
         });
 
         after('stop server, restore mock and configure',function () {
@@ -361,7 +340,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Internal server error');
-                    console.log(ERROR_STATUS, res.body);
                 });
         });
 
@@ -387,7 +365,6 @@ describe('Http.Api.Login', function () {
                 .expect(function(res) {
                     expect(res.body.message).to.be.a('string');
                     expect(res.body.message).to.equal('Some other message');
-                    console.log(UNAUTHORIZED_STATUS, res.body);
                 });
         });
 
