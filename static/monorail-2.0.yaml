@@ -609,27 +609,27 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /obms/library:
-    x-swagger-router-controller: unimplemented
-    get:
-      operationId: unimplemented
-      summary: |
-        get list of possible OBM services
-      description: |
-        get list of possible OBM services
-      tags:
-        - obms
-        - get
-      responses:
-        200:
-          description: |
-            get list of possible OBM services
-          schema:
-            type: object
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
+#   /obms/library:
+#     x-swagger-router-controller: obms
+#     get:
+#       operationId: getObmsLibrary
+#       summary: |
+#         get list of possible OBM services
+#       description: |
+#         get list of possible OBM services
+#       tags:
+#         - obms
+#         - get
+#       responses:
+#         200:
+#           description: |
+#             get list of possible OBM services
+#           schema:
+#             type: object
+#         default:
+#           description: Unexpected error
+#           schema:
+#             $ref: '#/definitions/Error'
   /obms/library/{identifier}:
     x-swagger-router-controller: unimplemented
     get:
